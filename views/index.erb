@@ -10,4 +10,19 @@ Please enter your information for the phone book.
         <input type = "text" name = "user_given_email" placeholder = "Email Address">
         
         <input type = "submit" value = "Click here to add information to the Phone Book">
+
     </form>
+
+    <% phonebook.each do |value| %>
+    <tr>
+        <td> <%= value['first_name'] %> </td>
+        <td> <%= value['last_name'] %> </td>
+        <td> <%= value['street'] %> </td>
+        <td> <%= value['city'] %> </td>
+        <td> <%= value['state'] %> </td>
+        <td> <%= value['zip'] %> </td>
+        <td> <%= value['phone'] %> </td>
+        <td> <%= value['email'] %> </td>
+    </tr>
+    <br>
+    <% end %>

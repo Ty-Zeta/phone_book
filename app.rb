@@ -15,7 +15,7 @@ db = PG::Connection.new(db_params)
 
 get '/' do
     phonebook = db.exec("Select * From user_given_data_table")
-    erb :index
+    erb :index, locals: {phonebook: phonebook}
 end
 
 post '/index' do
