@@ -87,3 +87,20 @@ Please enter your information for the phone book.
         
         <input type = "submit" value = "Update">
     </form>
+
+    <form action = '/delete_table_row' method = 'post'> Delete your row of information:
+        <select name = 'old_table_row'>
+            <option value = 'delete_first_name'> First Name </option>
+            <option value = 'delete_last_name'> Last Name </option>
+            <option value = 'delete_street_address_name'> Street Address </option>
+            <option value = 'delete_city'> City </option>
+            <option value = 'delete_state'> State </option>
+            <option value = 'delete_zip'> Zip Code </option>
+            <option value = 'delete_phone_number'> Phone Number </option>
+            <option value = 'delete_email'> Email Address </option>
+        </select>
+
+        <input type = "text" name "user_deleting_data" placeholder = "What row of information would you like to delete?">
+
+        <input type = "submit" value = "Delete Entry">
+    </form>

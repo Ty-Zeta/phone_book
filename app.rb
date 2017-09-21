@@ -58,3 +58,28 @@ post '/updated_table_cell' do
     end
     redirect '/'
 end
+
+post '/delete_table_row' do
+    deleted = params[:user_deleting_data]
+    row = params[:old_table_row]
+
+    case row
+        when 'delete_first_name'
+            db.exec("DELETE FROM user_given_data_table WHERE first_name = '#{deleted}'");
+        when 'delete_last_name'
+            db.exec("DELETE FROM user_given_data_table WHERE last_name = '#{deleted}'");
+        when 'delete_street_address_name'
+            db.exec("DELETE FROM user_given_data_table WHERE street_name = '#{deleted}'");
+        when 'delete_city'
+            db.exec("DELETE FROM user_given_data_table WHERE city = '#{deleted}'");
+        when 'delete_state'
+            db.exec("DELETE FROM user_given_data_table WHERE state = '#{deleted}'");
+        when 'delete_zip'
+            db.exec("DELETE FROM user_given_data_table WHERE zip = '#{deleted}'");
+        when 'delete_phone_number'
+            db.exec("DELETE FROM user_given_data_table WHERE phone_number = '#{deleted}'");
+        when 'delete_email'
+            db.exec("DELETE FROM user_given_data_table WHERE email = '#{deleted}'");
+    end
+    redirect '/'
+end
