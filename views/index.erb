@@ -1,28 +1,69 @@
 Please enter your information for the phone book.
-    <form method = "post" action = "/index">
-        <input type = "text" name = "user_given_first_name" placeholder = "First Name">
-        <input type = "text" name = "user_given_last_name" placeholder = "Last Name">
-        <input type = "text" name = "user_given_street_address" placeholder = "Street Address">
-        <input type = "text" name = "user_given_city" placeholder = "City">
-        <input type = "text" name = "user_given_state" placeholder = "State">
-        <input type = "text" name = "user_given_zip" placeholder = "Zip Code">
-        <input type = "text" name = "user_given_phone_number" placeholder = "Phone Number">
-        <input type = "text" name = "user_given_email" placeholder = "Email Address">
-        
-        <input type = "submit" value = "Click here to add information to the Phone Book">
+    <div id = "phonebook_user_input_section">
+        <form method = "post" action = "/index">
+            <input type = "text" name = "user_given_first_name" class = "form-control" placeholder = "First Name" required>
+            <input type = "text" name = "user_given_last_name" class = "form-control" placeholder = "Last Name" required>
+            <input type = "text" name = "user_given_street_address" class = "form-control" placeholder = "Street Address" required>
+            <input type = "text" name = "user_given_city" class = "form-control" placeholder = "City" required>
+            <input type = "text" name = "user_given_state" class = "form-control" placeholder = "State" minlength = "2" maxlength = "2" required>
+            <input type = "text" name = "user_given_zip" class = "form-control" placeholder = "Zip Code" minlength = "5" maxlength = "5" required>
+            <input type = "tel" name = "user_given_phone_number" class = "form-control" placeholder = "Phone Number" minlength = "10" maxlength = "10" required>
+            <input type = "email" name = "user_given_email" class = "form-control" placeholder = "Email Address" required>
+            
+            <input type = "submit" value = "Click here to add information to the Phone Book">
+        </form>
+    </div>
 
-    </form>
+    <input type = "text" id = "search_bar_input" onkeyup = "search_function()" placeholder = "Search your name" >
+    
+    <table id = "search_results_table">
+        <tr class = "header">
+                <th style = "width: 10%;" > First Name </th>
+                <th style = "width: 10%;" > Last Name </th>
+                <th style = "width: 10%;" > Street Address </th>
+                <th style = "width: 10%;" > City </th>
+                <th style = "width: 10%;" > State </th>
+                <th style = "width: 10%;" > Zip Code </th>
+                <th style = "width: 10%;" > Phone Number </th>
+                <th style = "width: 10%;" > Email Address </th>
+            </tr>
 
-    <% phonebook.each do |value| %>
-    <tr>
-        <td> <%= value['first_name'] %> </td>
-        <td> <%= value['last_name'] %> </td>
-        <td> <%= value['street'] %> </td>
-        <td> <%= value['city'] %> </td>
-        <td> <%= value['state'] %> </td>
-        <td> <%= value['zip'] %> </td>
-        <td> <%= value['phone'] %> </td>
-        <td> <%= value['email'] %> </td>
-    </tr>
-    <br>
-    <% end %>
+        <% phonebook.each do |value| %>
+        <tr>
+            <td> <%= value['first_name'] %> </td>
+            <td> <%= value['last_name'] %> </td>
+            <td> <%= value['street'] %> </td>
+            <td> <%= value['city'] %> </td>
+            <td> <%= value['state'] %> </td>
+            <td> <%= value['zip'] %> </td>
+            <td> <%= value['phone'] %> </td>
+            <td> <%= value['email'] %> </td>   <br>
+        </tr>
+
+        <% end %>
+    </table>
+
+    <script>
+        function search_function() {
+            var user_given_search_input, uppercase_filter, table, table_row, table_cell, counter;
+            
+            user_given_search_input = document.getElemntById("search_bar_input")
+            uppercase_filter = user_given_search_input.value.toUpperCase();
+            table = document.getElemntById("search_results_table")
+            table_row = table.getElementsByTagName("tr")
+
+            for (counter = 0; counter < table_row.length; counter++) {
+                table_cell = table_row[counter].getElementsByTagName("td")[0];
+                if (table_cell) {
+                    if (table_cell.innerHTML.toUpperCase().indexOf(uppercase_filter) > -1) {
+                        table_row[counter].style.display = "";
+                    }
+                    else {
+                        table_row[counter].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    

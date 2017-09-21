@@ -29,4 +29,6 @@ post '/index' do
     email = params[:user_given_email]
 
     db.exec("INSERT INTO public.user_given_data_table(first_name, last_name, street_name, city, state, zip, phone_number, email) VALUES('#{fname}', '#{lname}', '#{street}', '#{city}', '#{state}', '#{zip}', '#{phone}', '#{email}')");
+
+    redirect '/'
 end
