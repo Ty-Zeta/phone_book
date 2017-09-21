@@ -26,7 +26,7 @@ Please enter your information for the phone book.
                 <th style = "width: 10%;"> Zip Code </th>
                 <th style = "width: 10%;"> Phone Number </th>
                 <th style = "width: 10%;"> Email Address </th>
-            </tr>
+        </tr>
 
         <% phonebook.each do |value| %>
             <tr>
@@ -48,9 +48,9 @@ Please enter your information for the phone book.
         function search_function() {
             var user_given_search_input, uppercase_filter, table, table_row, table_cell, index_position;
             
-            user_given_search_input = document.getElemntById("search_bar_input")
+            user_given_search_input = document.getElementById("search_bar_input")
             uppercase_filter = user_given_search_input.value.toUpperCase();
-            table = document.getElemntById("search_results_table")
+            table = document.getElementById("search_results_table")
             table_row = table.getElementsByTagName("tr")
 
             for (index_position = 0; index_position < table_row.length; index_position++) {
