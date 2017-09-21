@@ -67,4 +67,23 @@ Please enter your information for the phone book.
         }
     </script>
 
-    
+    <form action = '/updated_table_cell' method = 'post'>
+        <select name = 'new_table_cell'>
+            <option value = 'new_first_name'> First Name </option>
+            <option value = 'new_last_name'> Last Name </option>
+            <option value = 'new_street_address_name'> Street Address </option>
+            <option value = 'new_city'> City </option>
+            <option value = 'new_state'> State </option>
+            <option value = 'new_zip'> Zip Code </option>
+            <option value = 'new_phone_number'> Phone Number </option>
+            <option value = 'new_email'> Email Address </option>
+        </select>
+
+        <br>
+
+        <input type = "text" name = "new_entry" placeholder = "Enter updated information"> <br>
+        <input type = "text" name = "old_entry" placeholder = "Enter old information"> <br>
+        
+        
+        <input type = "submit" value = "Update">
+    </form>

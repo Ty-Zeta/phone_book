@@ -32,3 +32,29 @@ post '/index' do
 
     redirect '/'
 end
+
+post '/updated_table_cell' do
+    new_entry = params[:new_entry]
+    old_entry = params[:old_entry]
+    cell = params[:new_table_cell]
+
+    case cell
+        when 'new_first_name'
+            db.exec("UPDATE user_given_data_table SET first_name = '#{new_entry}' WHERE first_name = '#{old_entry}'");
+        when 'new_last_name'
+            db.exec("UPDATE user_given_data_table SET last_name = '#{new_entry}' WHERE last_name = '#{old_entry}'");
+        when 'new_street_address_name'
+            db.exec("UPDATE user_given_data_table SET street_name = '#{new_entry}' WHERE street_name = '#{old_entry}'");
+        when 'new_city'
+            db.exec("UPDATE user_given_data_table SET city = '#{new_entry}' WHERE city = '#{old_entry}'");
+        when 'new_state'
+            db.exec("UPDATE user_given_data_table SET state = '#{new_entry}' WHERE state = '#{old_entry}'");
+        when 'new_zip'
+            db.exec("UPDATE user_given_data_table SET zip = '#{new_entry}' WHERE zip = '#{old_entry}'");
+        when 'new_phone_number'
+            db.exec("UPDATE user_given_data_table SET phone_number = '#{new_entry}' WHERE phone_number = '#{old_entry}'");
+        when 'new_email'
+            db.exec("UPDATE user_given_data_table SET email = '#{new_entry}' WHERE email = '#{old_entry}'");
+    end
+    redirect '/'
+end
