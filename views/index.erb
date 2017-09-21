@@ -14,52 +14,53 @@ Please enter your information for the phone book.
         </form>
     </div>
 
-    <input type = "text" id = "search_bar_input" onkeyup = "search_function()" placeholder = "Search your name" >
+    <input type = "text" id = "search_bar_input" onkeyup = "search_function()" placeholder = "Search your name">
     
     <table id = "search_results_table">
         <tr class = "header">
-                <th style = "width: 10%;" > First Name </th>
-                <th style = "width: 10%;" > Last Name </th>
-                <th style = "width: 10%;" > Street Address </th>
-                <th style = "width: 10%;" > City </th>
-                <th style = "width: 10%;" > State </th>
-                <th style = "width: 10%;" > Zip Code </th>
-                <th style = "width: 10%;" > Phone Number </th>
-                <th style = "width: 10%;" > Email Address </th>
+                <th style = "width: 10%;"> First Name </th>
+                <th style = "width: 10%;"> Last Name </th>
+                <th style = "width: 10%;"> Street Address </th>
+                <th style = "width: 10%;"> City </th>
+                <th style = "width: 10%;"> State </th>
+                <th style = "width: 10%;"> Zip Code </th>
+                <th style = "width: 10%;"> Phone Number </th>
+                <th style = "width: 10%;"> Email Address </th>
             </tr>
 
         <% phonebook.each do |value| %>
-        <tr>
-            <td> <%= value['first_name'] %> </td>
-            <td> <%= value['last_name'] %> </td>
-            <td> <%= value['street'] %> </td>
-            <td> <%= value['city'] %> </td>
-            <td> <%= value['state'] %> </td>
-            <td> <%= value['zip'] %> </td>
-            <td> <%= value['phone'] %> </td>
-            <td> <%= value['email'] %> </td>   <br>
-        </tr>
-
+            <tr>
+                <td> <%= value['first_name'] %> </td>
+                <td> <%= value['last_name'] %> </td>
+                <td> <%= value['street_name'] %> </td>
+                <td> <%= value['city'] %> </td>
+                <td> <%= value['state'] %> </td>
+                <td> <%= value['zip'] %> </td>
+                <td> <%= value['phone_number'] %> </td>
+                <td> <%= value['email'] %> </td>
+                
+                <br>
+            </tr>
         <% end %>
     </table>
 
     <script>
         function search_function() {
-            var user_given_search_input, uppercase_filter, table, table_row, table_cell, counter;
+            var user_given_search_input, uppercase_filter, table, table_row, table_cell, index_position;
             
             user_given_search_input = document.getElemntById("search_bar_input")
             uppercase_filter = user_given_search_input.value.toUpperCase();
             table = document.getElemntById("search_results_table")
             table_row = table.getElementsByTagName("tr")
 
-            for (counter = 0; counter < table_row.length; counter++) {
-                table_cell = table_row[counter].getElementsByTagName("td")[0];
+            for (index_position = 0; index_position < table_row.length; index_position++) {
+                table_cell = table_row[index_position].getElementsByTagName("td")[0];
                 if (table_cell) {
                     if (table_cell.innerHTML.toUpperCase().indexOf(uppercase_filter) > -1) {
-                        table_row[counter].style.display = "";
+                        table_row[index_position].style.display = "";
                     }
                     else {
-                        table_row[counter].style.display = "none";
+                        table_row[index_position].style.display = "none";
                     }
                 }
             }
