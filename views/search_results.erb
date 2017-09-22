@@ -1,0 +1,14 @@
+<DOCTYPE html>
+
+    Search by first name or phone number
+        <form method = "post" action = '/searching'>
+            <input type = "text" name = "searched_first_name" placeholder = "Search by first name">
+            <input type = "text" name = "searched_phone_number" placeholder = "Search by phone number">
+
+            <input type = "submit" value = "Search">
+        </form>
+
+        <div id = "search_results_div">
+            <%= session[:search_results_table] %>
+        </div>
+</html>

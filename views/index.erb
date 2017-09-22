@@ -13,8 +13,6 @@ Please enter your information for the phone book.
             <input type = "submit" value = "Click here to add information to the Phone Book">
         </form>
     </div>
-
-    <input type = "text" id = "search_bar_input" onkeyup = "search_function()" placeholder = "Search your name">
     
     <table id = "search_results_table">
         <tr class = "header">
@@ -44,29 +42,24 @@ Please enter your information for the phone book.
         <% end %>
     </table>
 
-    <script>
-        function search_function() {
-            var user_given_search_input, uppercase_filter, table, table_row, table_cell, index_position;
-            
-            user_given_search_input = document.getElementById("search_bar_input")
-            uppercase_filter = user_given_search_input.value.toUpperCase();
-            table = document.getElementById("search_results_table")
-            table_row = table.getElementsByTagName("tr")
+<br>
+<br>
 
-            for (index_position = 0; index_position < table_row.length; index_position++) {
-                table_cell = table_row[index_position].getElementsByTagName("td")[0];
-                if (table_cell) {
-                    if (table_cell.innerHTML.toUpperCase().indexOf(uppercase_filter) > -1) {
-                        table_row[index_position].style.display = "";
-                    }
-                    else {
-                        table_row[index_position].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
+    Search by first name or phone number
+        <form method = "post" action = '/searching'>
+            <input type = "text" name = "searched_first_name" placeholder = "Search by first name">
+            <input type = "text" name = "searched_phone_number" placeholder = "Search by phone number">
 
+            <input type = "submit" value = "Search">
+        </form>
+    <div id = "display">
+        <%= session[:search_results_table]%>
+    </div>
+
+<br>
+<br>
+
+Update and Change your information
     <form action = '/updated_table_cell' method = 'post'>
         <select name = 'new_table_cell'>
             <option value = 'new_first_name'> First Name </option>
@@ -104,3 +97,28 @@ Please enter your information for the phone book.
 
         <input type = "submit" value = "Delete Entry">
     </form>
+
+
+<%# <input type = "text" id = "search_bar_input" onkeyup = "search_function()" placeholder = "Search your name"> %>
+    <%# <script>
+        function search_function() {
+            var user_given_search_input, uppercase_filter, table, table_row, table_cell, index_position;
+            
+            user_given_search_input = document.getElementById("search_bar_input")
+            uppercase_filter = user_given_search_input.value.toUpperCase();
+            table = document.getElementById("search_results_table")
+            table_row = table.getElementsByTagName("tr")
+
+            for (index_position = 0; index_position < table_row.length; index_position++) {
+                table_cell = table_row[index_position].getElementsByTagName("td")[0];
+                if (table_cell) {
+                    if (table_cell.innerHTML.toUpperCase().indexOf(uppercase_filter) > -1) {
+                        table_row[index_position].style.display = "";
+                    }
+                    else {
+                        table_row[index_position].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script> %>
