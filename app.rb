@@ -12,26 +12,38 @@ db_params = {
     password: ENV['password']
 }
 
-$db = PG::Connection.new(db_params)
-
-# get '/' do
-#     login_info = db.exec("Select * From phonebook_username_password_login_table")
-#     erb :login, locals: {login_info: login_info}
-# end
-
-# post '/login' do
-#     new_username = params[:sign_up_username]
-#     new_password = params[:sign_up_password]
-#     checked_username = params[:user_given_username]
-#     checked_password = params[:user_given_password]
-    
-#     db.exec("INSERT INTO public.phonebook_username_password_login_table(username_column, password_column) VALUES('#{new_username}', '#{new_password}')");
-
-#     redirect '/'
-# end
+db = PG::Connection.new(db_params)
 
 get '/' do
-    phonebook = $db.exec("Select * From user_given_data_table")
+    login_info = db.exec("Select * From phonebook_username_password_login_table")
+    erb :login_page, locals: {login_info: login_info}
+end
+
+post '/signup' do
+    new_username = params[:sign_up_username]
+    new_password = params[:sign_up_password]
+
+    db.exec("INSERT INTO public.phonebook_username_password_login_table(username_column, password_column) VALUES('#{new_username}', '#{new_password}')");
+
+    redirect '/'
+end
+
+post '/login' do
+    checked_username = params[:user_given_username]
+    checked_password = params[:user_given_password]
+    
+    correct_login = db.exec("SELECT * FROM phonebook_username_password_login_table WHERE username_column = '#{checked_username}'")
+    login_data = correct_login.values.flatten
+    
+    if login_data.include?(checked_password)
+        redirect '/index'
+    else
+        redirect '/'
+    end
+end
+
+get '/index' do
+    phonebook = db.exec("Select * FROM user_given_data_table")
     erb :index, locals: {phonebook: phonebook}
 end
 
@@ -47,7 +59,7 @@ post '/index' do
 
     $db.exec("INSERT INTO public.user_given_data_table(first_name, last_name, street_name, city, state, zip, phone_number, email) VALUES('#{fname}', '#{lname}', '#{street}', '#{city}', '#{state}', '#{zip}', '#{phone}', '#{email}')");
 
-    redirect '/'
+    redirect '/index'
 end
 
 get '/search_results' do
@@ -83,7 +95,7 @@ post '/updated_table_cell' do
         when 'new_email'
             db.exec("UPDATE user_given_data_table SET email = '#{new_entry}' WHERE email = '#{old_entry}'");
     end
-    redirect '/'
+    redirect '/index'
 end
 
 post '/delete_table_row' do
@@ -108,5 +120,5 @@ post '/delete_table_row' do
         when 'delete_email'
             db.exec("DELETE FROM user_given_data_table WHERE email = '#{deleted}'");
     end
-    redirect '/'
+    redirect '/index'
 end
