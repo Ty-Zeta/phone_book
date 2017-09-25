@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'pg'
 require_relative 'phonebook_search.rb'
-enable :sessions
+enable 'sessions'
 load './local_env.rb' if File.exist?('./local_env.rb')
 
 db_params = {
@@ -36,8 +36,8 @@ get '/' do
 end
 
 post '/index' do
-    fname = params[:user_given_first_name]
-    lname = params[:user_given_last_name]
+    fname = params[:user_given_first_name].capitalize
+    lname = params[:user_given_last_name].capitalize
     street = params[:user_given_street_address]
     city = params[:user_given_city]
     state = params[:user_given_state]
@@ -54,9 +54,8 @@ get '/search_results' do
     erb :search_results
 end
 
-post '/searching' do
+post '/index_search_form' do
     @params = params
-    print(@params)
     session[:search_results_table] = full_search_table_render(@params)
     redirect '/search_results'
 end

@@ -46,14 +46,14 @@ Please enter your information for the phone book.
 <br>
 
     Search by first name or phone number
-        <form method = "post" action = '/searching'>
+        <form method = "post" action = '/index_search_form'>
             <input type = "text" name = "searched_first_name" placeholder = "Search by first name">
             <input type = "text" name = "searched_phone_number" placeholder = "Search by phone number">
 
             <input type = "submit" value = "Search">
         </form>
     <div id = "display">
-        <%= session[:search_results_table]%>
+        <%= session[:search_results_table] %>
     </div>
 
 <br>
