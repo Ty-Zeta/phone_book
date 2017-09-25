@@ -35,7 +35,7 @@ post '/login' do
     correct_login = db.exec("SELECT * FROM phonebook_username_password_login_table WHERE username_column = '#{checked_username}'")
     login_data = correct_login.values.flatten
     
-    if login_data.include?(checked_password)
+    if login_data[0] == checked_username && login_data[1] == checked_password
         redirect '/index'
     else
         redirect '/'
