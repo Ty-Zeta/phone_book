@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'pg'
+require 'bcrypt'
 require_relative 'phonebook_search.rb'
 enable 'sessions'
 load './local_env.rb' if File.exist?('./local_env.rb')
@@ -22,8 +23,8 @@ end
 post '/signup' do
     new_username = params[:sign_up_username]
     new_password = params[:sign_up_password]
-
-    db.exec("INSERT INTO public.phonebook_username_password_login_table(username_column, password_column) VALUES('#{new_username}', '#{new_password}')");
+    bcrypt_password = BCrypt::Password.create "#{new_password}"
+    db.exec("INSERT INTO public.phonebook_username_password_login_table(username_column, password_column) VALUES('#{new_username}', '#{bcrypt_password}')");
 
     redirect '/'
 end
